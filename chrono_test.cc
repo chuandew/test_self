@@ -26,19 +26,11 @@ int main ()
     std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count() << "\n";
 
     auto now_ms = time_point_cast<milliseconds>(now);
-    std::cout << now_ms.count() << "\n";
-
     auto value = now_ms.time_since_epoch();
-    std::cout << value.count() << "\n";
-
-
     uint64_t duration = value.count();
-
     std::cout << "dur." << duration << std::endl;
 
     uint64_t next = duration_cast<milliseconds>(value + std::chrono::milliseconds(1000)).count();
-
     std::cout << "next." << next << std::endl;
-
 
 }
