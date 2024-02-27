@@ -3,12 +3,12 @@
 #include "vector.h"
 %}
 
-class Vector{
-public:
-    Vector(int,int);
-    double abs();
-    void display();
-private:
-    int x;
-    int y;
-};
+%include <std_vector.i>
+%include <typemaps.i>
+%include <stdint.i>
+
+%template(CustomeVector)  std::vector<Vector>;
+
+%apply double& OUTPUT  { double& a };
+
+%include "vector.h"
