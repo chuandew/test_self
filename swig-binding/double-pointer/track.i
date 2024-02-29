@@ -15,7 +15,4 @@
   %append_output(SWIG_NewPointerObj(%as_voidptr(*$1), $*1_descriptor, SWIG_POINTER_OWN));
 }
 
-%ignore operator[];
-%ignore operator=;
-
 %include "track.h"

@@ -15,7 +15,7 @@ void Track::display() {
 double Track::abs() { return std::sqrt(x * x + y * y); }
 
 int TrackUtil::new_track(Track **v) {
-  Track *t = new Track(1, 2);
+  Track *t = new Track(3, 4);
   *v = t;
   return 0;
 }
