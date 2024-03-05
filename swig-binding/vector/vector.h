@@ -9,7 +9,7 @@ public:
   Vector() = default;
   Vector(uint64_t, uint64_t);
   double abs();
-  void display();
+  void display() const;
 
 private:
   uint64_t x;
@@ -21,6 +21,8 @@ public:
   int add(std::vector<Vector>& vector, int i);
 
   int set(double& a);
+
+  void display(const std::vector<Vector>& vector);
 };
 
 #endif
