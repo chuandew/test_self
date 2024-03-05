@@ -48,4 +48,46 @@
     }
 }
 
+%typemap(in) const std::vector<Person>& (std::vector<Person> temp){
+    if (!PyList_Check($input)) {
+        PyErr_SetString(PyExc_TypeError, "Expected a list.");
+        SWIG_fail;
+    }
+
+    int size = PyList_Size($input);
+    temp.reserve(size);
+
+    for (int i = 0; i < size; i++) {
+        PyObject* item = PyList_GetItem($input, i);
+
+        if (!PyTuple_Check(item) || PyTuple_Size(item) != 2) {
+            PyErr_SetString(PyExc_TypeError, "Expected a tuple of size 2.");
+            SWIG_fail;
+        }
+
+        PyObject* nameObj = PyTuple_GetItem(item, 0);
+        PyObject* ageObj = PyTuple_GetItem(item, 1);
+
+        if (!PyUnicode_Check(nameObj) || !PyLong_Check(ageObj)) {
+            PyErr_SetString(PyExc_TypeError, "Invalid tuple format.");
+            SWIG_fail;
+        }
+
+        std::string name = PyUnicode_AsUTF8(nameObj);
+        int age = PyLong_AsLong(ageObj);
+
+        Person person;
+        person.name = name;
+        person.age = age;
+
+        temp.push_back(person);
+    }
+
+    $1 = &temp;
+}
+
+%typemap(freearg) const std::vector<Person>& {
+    // if ($1) delete $1;
+}
+
 %include "example.h"

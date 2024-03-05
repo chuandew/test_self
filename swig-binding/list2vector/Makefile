@@ -4,4 +4,4 @@ _example.so : example.h example_wrap.cxx
 example_wrap.cxx : example.i
 	swig -c++ -python example.i
 clean :
-	rm _example.so example_wrap.cxx example.py
+	rm -rf _example.so example_wrap.cxx example.py __pycache__
