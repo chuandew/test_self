@@ -1,6 +1,6 @@
-import example
+import person
 
-# example.display([example.Person("A",3), example.Person("B",2), example.Person("C",1)]) 
-example.displayv1([("A",3),("B",2),("C",1)])
+# person.display([person.Person("A",3), person.Person("B",2), person.Person("C",1)]) 
+person.displayv1([("A",3),("B",2),("C",1)])
 
-example.displayv2([("A",3),("B",2),("C",1)])
+person.displayv2([("A",3),("B",2),("C",1)])

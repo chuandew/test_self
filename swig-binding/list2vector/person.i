@@ -1,7 +1,7 @@
-%module example
+%module person
 
 %{
-#include "example.h"
+#include "person.h"
 %}
 
 %include <stdint.i>
@@ -90,4 +90,4 @@
     // if ($1) delete $1;
 }
 
-%include "example.h"
+%include "person.h"
