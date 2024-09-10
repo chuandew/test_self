@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <iomanip>
 #include <iostream>
 #include <string>
 #include <sys/types.h>
@@ -17,6 +16,8 @@ const char *kDatabaseName = "access.db";
 void LogBDBError(const DbEnv *, const char * /*errpfx*/, const char *msg) {
   std::cout << "[bdb] error msg: " << msg << "\n";
 }
+
+const char* db_home = "/tmp";
 
 int main() {
 
@@ -92,7 +93,7 @@ int main() {
     env.set_timeout(5 * 1000 * 1000, DB_SET_LOCK_TIMEOUT);
 
     std::cout << "[bdb] set txn_max to:" << txn_max << std::endl;
-    env.open("/root/db", env_flags, 0);
+    env.open(db_home, env_flags, 0);
 
     db = new Db(&env, 0);
     // If you want to support duplicated records and make duplicated
@@ -206,7 +207,8 @@ int main() {
         // You have to close and delete an exisiting handle, then create
         // a new one before you can use it to remove a database (file).
         db = new Db(NULL, 0);
-        db->remove("/root/db/access.db", NULL, 0);
+        std::string db_name = db_home + std::string("/") + kDatabaseName;
+        db->remove(db_name.c_str(), NULL, 0);
         delete db;
       }
       env.close(0);

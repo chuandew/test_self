@@ -1,5 +1,6 @@
 #include "rocksdb/db.h"
 #include <iostream>
+#include <rocksdb/transaction_log.h>
 
 int main(int argc, char *argv[]) {
   rocksdb::DB *db;
@@ -23,6 +24,9 @@ int main(int argc, char *argv[]) {
   } else {
     std::cout << "put key error, with status: " << status.code() << std::endl;
   }
+
+
+
 
   db->Close();
 
