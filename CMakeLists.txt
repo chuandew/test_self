@@ -57,31 +57,28 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-## rocksdb
-FetchContent_Declare(
-  rocksdb
-  GIT_REPOSITORY https://github.com/facebook/rocksdb.git
-  GIT_TAG        v8.10.0
-  GIT_PROGRESS   TRUE
-)
+# ## rocksdb
+# FetchContent_Declare(
+#   rocksdb
+#   GIT_REPOSITORY https://github.com/facebook/rocksdb.git
+#   GIT_TAG        v8.10.0
+#   GIT_PROGRESS   TRUE
+# )
 
-FetchContent_Populate(rocksdb)
-add_custom_target(librocksdb ALL
-  WORKING_DIRECTORY ${rocksdb_SOURCE_DIR}
-  COMMAND cmake -DWITH_GFLAGS=Off -DWITH_LIBURING=Off -DWITH_ZSTD=0 -DFAIL_ON_WARNINGS=Off -B ${rocksdb_BINARY_DIR}
-  COMMAND cmake --build ${rocksdb_BINARY_DIR} --parallel 8 --target rocksdb
-  BYPRODUCTS ${rocksdb_BINARY_DIR}/librocksdb.a
-  COMMENT "Building RocksDB"
-  USES_TERMINAL
-)
-include_directories(SYSTEM "${rocksdb_SOURCE_DIR}/include")
+# FetchContent_Populate(rocksdb)
+# add_custom_target(librocksdb ALL
+#   WORKING_DIRECTORY ${rocksdb_SOURCE_DIR}
+#   COMMAND cmake -DWITH_GFLAGS=Off -DWITH_LIBURING=Off -DWITH_ZSTD=0 -DFAIL_ON_WARNINGS=Off -B ${rocksdb_BINARY_DIR}
+#   COMMAND cmake --build ${rocksdb_BINARY_DIR} --parallel 8 --target rocksdb
+#   BYPRODUCTS ${rocksdb_BINARY_DIR}/librocksdb.a
+#   COMMENT "Building RocksDB"
+#   USES_TERMINAL
+# )
+# include_directories(SYSTEM "${rocksdb_SOURCE_DIR}/include")
 
 # 调用xxx子目录的CMakeLists.txt执行 add_subdirectory(xxx)
-add_subdirectory(bdb-example)
-add_subdirectory(rocksdb-example)
-
-# 给编译器添加xxx参数
-add_compile_options(xxx)
+# add_subdirectory(bdb-example)
+# add_subdirectory(rocksdb-example)
 
 # 添加include路径，也就是头文件路径 
 # target_include_directories(bdb_test PUBLIC /root/workspace/bdb/install/include)
@@ -91,3 +88,6 @@ add_compile_options(xxx)
 
 # 给目标添加依赖库，有点儿类似-l(小写的L)
 # target_link_libraries(bdb_test db_cxx)
+
+
+add_subdirectory(epoll-example)
